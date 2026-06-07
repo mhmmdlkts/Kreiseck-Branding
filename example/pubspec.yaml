@@ -1,0 +1,16 @@
+name: kreiseck_branding_example
+description: Beispiel-App für das kreiseck_branding-Paket.
+publish_to: 'none'
+version: 1.0.0
+
+environment:
+  sdk: '>=3.2.3 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  kreiseck_branding:
+    path: ../
+
+flutter:
+  uses-material-design: true
