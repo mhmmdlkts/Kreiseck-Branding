@@ -1,132 +1,75 @@
-<div align="center">
+# kreiseck_branding
 
-# Kreiseck Branding
+Das Kreiseck-Logo und die Markenfarben als kleines Flutter-Paket, damit ich
+das Branding nicht in jeder App neu zusammensuchen muss.
 
-**Das offizielle Branding von Kreiseck Software Solutions für Flutter.**
+## Einbinden
 
-Logo-Widget, Markenfarben und Assets – damit das Kreiseck-Branding
-in jeder App einheitlich und mit frei wählbarer Farbe gezeichnet wird.
-
-</div>
-
----
-
-## Was ist drin?
-
-| Komponente          | Beschreibung                                                        |
-| ------------------- | ------------------------------------------------------------------ |
-| `KreiseckLogo`      | Logo-Widget, auf eine beliebige Farbe einfärbbar (oder original).  |
-| `KreiseckColors`    | Zentrale Markenfarben (`brand`, `brandLight`, `subtitle`).         |
-| Assets              | `kreiseck_logo.svg`, `kreiseck_branding(.dark).png`.               |
-
----
-
-## Installation
-
-Da das Paket (vorerst) über Git verteilt wird, in der `pubspec.yaml` der
-App eintragen:
+Solange das Paket nur auf GitHub liegt, in die `pubspec.yaml` der App:
 
 ```yaml
 dependencies:
   kreiseck_branding:
     git:
       url: https://github.com/mhmmdlkts/Kreiseck-Branding.git
-      ref: main   # oder ein Tag wie v0.1.0
+      ref: main
 ```
 
-Danach:
+Dann `flutter pub get`.
 
-```bash
-flutter pub get
-```
-
-> Sobald das Paket auf [pub.dev](https://pub.dev) veröffentlicht ist, genügt
-> `kreiseck_branding: ^0.1.0`.
-
----
-
-## Verwendung
+## Logo
 
 ```dart
 import 'package:kreiseck_branding/kreiseck_branding.dart';
 ```
 
-### Logo mit eigener Farbe
-
-Die Farbe ist das zentrale Eingabefeld – das gesamte Logo wird auf genau
-diese eine Farbe vereinheitlicht:
+Ohne Farbe kommt das Logo so wie es gedacht ist – roter Kreis, schwarzer
+Schriftzug, grauer Untertitel:
 
 ```dart
-const KreiseckLogo(
-  color: Colors.red,
+KreiseckLogo(width: 150)
+```
+
+Wenn ich es einfarbig brauche (z.B. weiss auf dunklem Grund), reicht eine
+Farbe. Damit wird das komplette Logo auf diese eine Farbe gelegt:
+
+```dart
+KreiseckLogo(color: Colors.white, width: 150)
+KreiseckLogo(color: Colors.red, width: 150)
+```
+
+Soll sich das einfarbige Logo nach Hell/Dunkel richten:
+
+```dart
+KreiseckLogo(
+  color: KreiseckColors.forBrightness(Theme.of(context).brightness),
   width: 150,
 )
 ```
 
-### Logo in der Markenfarbe
+Parameter: `color`, `width`, `height`, `fit` (Standard `BoxFit.contain`) und
+`semanticsLabel`.
+
+## Farben und Schrift
 
 ```dart
-const KreiseckLogo(
-  color: KreiseckColors.brand,
-  width: 150,
-)
+KreiseckColors.circle    // #930C0C  roter Kreis
+KreiseckColors.wordmark  // #000000  Schriftzug
+KreiseckColors.subtitle  // #5C5C5C  Untertitel
 ```
 
-### Logo automatisch passend zum Theme
+Das sind die Standardfarben – für einzelne Apps nehme ich aber durchaus auch
+andere.
 
-Ohne `color` richtet sich das Logo nach der Helligkeit des aktuellen Themes:
-Markenfarbe im Light-Mode, Weiß im Dark-Mode.
+Hausschrift ist **DM Sans** (`kreiseckFontFamily`). Die liegt nicht im Paket,
+die App muss sie selbst einbinden, etwa über `google_fonts`.
 
-```dart
-const KreiseckLogo(width: 150)
-```
+## Beispiel
 
-### Original-Logo (mehrfarbig)
-
-```dart
-const KreiseckLogo.original(width: 150)
-```
-
-### Markenfarben direkt nutzen
-
-```dart
-Container(color: KreiseckColors.brand);
-
-Text(
-  'Kreiseck',
-  style: TextStyle(
-    color: KreiseckColors.forBrightness(Theme.of(context).brightness),
-  ),
-);
-```
-
----
-
-## API
-
-### `KreiseckLogo`
-
-| Parameter        | Typ        | Default            | Beschreibung                                          |
-| ---------------- | ---------- | ------------------ | ----------------------------------------------------- |
-| `color`          | `Color?`   | `null`             | Einfärbung. `null` ⇒ automatisch passend zum Theme.   |
-| `width`          | `double?`  | `null`             | Gewünschte Breite.                                    |
-| `height`         | `double?`  | `null`             | Gewünschte Höhe.                                      |
-| `fit`            | `BoxFit`   | `BoxFit.contain`   | Einpassung in die vorgegebene Größe.                  |
-| `semanticsLabel` | `String`   | `'Kreiseck Logo'`  | Label für Screenreader.                               |
-
-`KreiseckLogo.original(...)` zeichnet das Logo ohne Farbfilter (mehrfarbig).
-
-### `KreiseckColors`
-
-| Konstante / Methode             | Wert / Rückgabe              |
-| ------------------------------- | ---------------------------- |
-| `brand`                         | `#2C3E50` (Slate-Blau)       |
-| `brandLight`                    | `#A2C2DC`                    |
-| `subtitle`                      | `#5C5C5C`                    |
-| `forBrightness(Brightness)`     | Markenfarbe / Weiß je Modus  |
-
----
+Unter `example/` liegt eine kleine App, in der man die Logo-Farbe umschalten
+kann.
 
 ## Lizenz
 
-© Kreiseck Software Solutions. Siehe [LICENSE](LICENSE).
+Siehe [LICENSE](LICENSE). Logo und Markenzeichen gehören Kreiseck Software
+Solutions.

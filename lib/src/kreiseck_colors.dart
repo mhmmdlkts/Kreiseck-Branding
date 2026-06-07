@@ -1,23 +1,29 @@
 import 'package:flutter/material.dart';
 
-/// Zentrale Markenfarben von Kreiseck Software Solutions.
+/// Die festen Farben des Kreiseck-Logos.
 ///
-/// In jeder App identisch verwendbar – als `const` für `const`-Widgets,
-/// Enums etc.
+/// Der rote Kreis ist das Erkennungszeichen, der Schriftzug ist schwarz,
+/// der Untertitel grau. Wenn das Logo mal einfarbig sein soll (z.B. weiss
+/// auf dunklem Grund), lässt sich über [KreiseckLogo] trotzdem jede Farbe
+/// setzen.
 abstract final class KreiseckColors {
   KreiseckColors._();
 
-  /// Primäre Markenfarbe (Slate-Blau, `#2C3E50`).
-  static const Color brand = Color(0xFF2C3E50);
+  /// Roter Kreis – das Markenzeichen.
+  static const Color circle = Color(0xFF930C0C);
 
-  /// Hellere Variante der Markenfarbe – z.B. für Akzente auf dunklem Grund.
-  static const Color brandLight = Color(0xFFA2C2DC);
+  /// Schriftzug "KREISECK".
+  static const Color wordmark = Color(0xFF000000);
 
-  /// Sekundärfarbe für den Subtitel ("Software Solutions").
+  /// Untertitel "Software Solutions".
   static const Color subtitle = Color(0xFF5C5C5C);
 
-  /// Liefert die passende Logo-/Markenfarbe für die aktuelle Helligkeit:
-  /// Markenfarbe im Light-, Weiß im Dark-Mode.
+  /// Farbe fürs einfarbige Logo je nach Hintergrund: schwarzer Schriftzug
+  /// auf hellem, weiss auf dunklem Grund.
   static Color forBrightness(Brightness brightness) =>
-      brightness == Brightness.dark ? Colors.white : brand;
+      brightness == Brightness.dark ? Colors.white : wordmark;
 }
+
+/// Hausschrift von Kreiseck. Liegt nicht im Paket – die App muss DM Sans
+/// selbst einbinden (z.B. per google_fonts oder als Asset).
+const String kreiseckFontFamily = 'DM Sans';

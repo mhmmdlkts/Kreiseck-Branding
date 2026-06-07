@@ -1,7 +1,6 @@
 name: kreiseck_branding
 description: >-
-  Kreiseck Software Solutions Branding für Flutter – Logo-Widgets,
-  Markenfarben und Assets, in jeder App einheitlich und frei einfärbbar.
+  Kreiseck-Logo und Markenfarben für Flutter-Apps.
 version: 0.1.0
 homepage: https://kreiseck.com
 repository: https://github.com/mhmmdlkts/Kreiseck-Branding
@@ -21,5 +20,3 @@ dev_dependencies:
 flutter:
   assets:
     - assets/kreiseck_logo.svg
-    - assets/kreiseck_branding.png
-    - assets/kreiseck_branding_dark.png

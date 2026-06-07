@@ -1,7 +1,4 @@
-/// Kreiseck Software Solutions – Branding für Flutter.
-///
-/// Stellt das Kreiseck-Logo als einfärbbares Widget sowie die zentralen
-/// Markenfarben bereit, damit das Branding in jeder App einheitlich ist.
+/// Kreiseck-Branding für Flutter: Logo-Widget und Markenfarben.
 library kreiseck_branding;
 
 export 'src/kreiseck_colors.dart';

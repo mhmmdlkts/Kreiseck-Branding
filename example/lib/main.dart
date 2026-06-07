@@ -11,43 +11,50 @@ class ExampleApp extends StatefulWidget {
 }
 
 class _ExampleAppState extends State<ExampleApp> {
-  // Auswählbare Farben für das "Eingabefeld".
-  static const _palette = <Color>[
-    KreiseckColors.brand,
-    Colors.red,
-    Colors.green,
-    Colors.deepPurple,
+  // null = Originalfarben, sonst einfarbig.
+  static const _choices = <Color?>[
+    null,
     Colors.black,
+    Colors.white,
+    Colors.red,
+    Colors.blue,
   ];
-  Color _color = KreiseckColors.brand;
+  Color? _color;
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Kreiseck Branding',
-      theme: ThemeData(colorSchemeSeed: KreiseckColors.brand),
       home: Scaffold(
         appBar: AppBar(title: const Text('Kreiseck Branding')),
+        backgroundColor: _color == Colors.white ? Colors.black54 : null,
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              KreiseckLogo(color: _color, width: 220),
+              KreiseckLogo(color: _color, width: 240),
               const SizedBox(height: 48),
-              const Text('Farbe wählen:'),
+              const Text('Farbe:'),
               const SizedBox(height: 12),
               Wrap(
                 spacing: 12,
                 children: [
-                  for (final c in _palette)
+                  for (final c in _choices)
                     GestureDetector(
                       onTap: () => setState(() => _color = c),
                       child: CircleAvatar(
-                        backgroundColor: c,
                         radius: 18,
+                        backgroundColor: c ?? KreiseckColors.circle,
                         child: _color == c
-                            ? const Icon(Icons.check, color: Colors.white, size: 18)
-                            : null,
+                            ? Icon(Icons.check,
+                                size: 18,
+                                color: c == Colors.white
+                                    ? Colors.black
+                                    : Colors.white)
+                            : (c == null
+                                ? const Text('A',
+                                    style: TextStyle(color: Colors.white))
+                                : null),
                       ),
                     ),
                 ],
